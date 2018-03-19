@@ -7,6 +7,7 @@ package it.polito.tdp.alien;
 
 
 import java.net.URL;
+import java.util.*;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class AlienController {
+	
+	private Dizionario modello;
+	
 	
     @FXML
     private ResourceBundle resources;
@@ -43,13 +47,44 @@ public class AlienController {
     
     @FXML
     void doTranslate(ActionEvent event) {
-    	    	
+    	    try{ 
+    	    		String input=txtWord.getText();
+    	    		String arrayInput[] = input.split(" ");
+    	    		if(arrayInput.length==1) {
+    	    			txtResult.appendText("\n--> "+arrayInput[0]+" = "+modello.translateWord(arrayInput[0]));
+    	    		}
+    	    		if(arrayInput.length>1) {
+    	    			List<String> listaOutput = new LinkedList<String>();
+    	    			for(int i=1; i<arrayInput.length; i++) {
+    	    				listaOutput.add(arrayInput[i]);
+    	    			}
+    	    			
+    	    			modello.addWord(arrayInput[0], listaOutput);
+    	    			txtResult.appendText("\n--> aggiunta "+arrayInput[0] + " = ");
+    	    			for(String s:listaOutput)
+    	    				txtResult.appendText(s+" ");
+    	    		}
+    	    
+    	    }catch(Exception e) {
+    	    		txtResult.appendText("inserire min 1 parola max 2 parole");
+    	    }
+    		
     }
     
     
     @FXML
     void doReset(ActionEvent event) {
-
+    		txtResult.clear();
     }
+
+
+	public Dizionario getModello() {
+		return modello;
+	}
+
+
+	public void setModello(Dizionario modello) {
+		this.modello = modello;
+	}
     
 }
