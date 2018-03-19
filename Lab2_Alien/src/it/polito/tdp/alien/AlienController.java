@@ -48,10 +48,14 @@ public class AlienController {
     @FXML
     void doTranslate(ActionEvent event) {
     	    try{ 
-    	    		String input=txtWord.getText();
+    	    		String input=txtWord.getText().toLowerCase();
     	    		String arrayInput[] = input.split(" ");
     	    		if(arrayInput.length==1) {
-    	    			txtResult.appendText("\n--> "+arrayInput[0]+" = "+modello.translateWord(arrayInput[0]));
+    	    			if(arrayInput[0].contains("?"))
+    	    				txtResult.appendText("\n--> "+ modello.paroleCompatibiliToString(arrayInput[0]));
+    	    			else
+    	    				txtResult.appendText("\n--> "+arrayInput[0]+" = "+modello.translateWord(arrayInput[0]));
+    	    		
     	    		}
     	    		if(arrayInput.length>1) {
     	    			List<String> listaOutput = new LinkedList<String>();
