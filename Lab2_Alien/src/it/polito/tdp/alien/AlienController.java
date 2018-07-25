@@ -68,8 +68,11 @@ public class AlienController {
     	    			for(String s:listaOutput)
     	    				txtResult.appendText(s+" ");
     	    		}
-    	    
-    	    }catch(Exception e) {
+    	    }
+//    	    }catch(ZeroParoleException zpe) {
+//    	    		zpe.printStackTrace();
+//    	    }
+    	    catch(Exception e) {
     	    		txtResult.appendText("inserire min 1 parola max 2 parole");
     	    }
     		
